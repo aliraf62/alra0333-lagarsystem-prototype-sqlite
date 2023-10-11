@@ -49,8 +49,11 @@ The project is divided into multiple Python files, each responsible for a specif
 
 ## Call Graph
 
-Please refer to `call_graph.dot` for the call graph of the system.
-
+Please refer to `call_graph.dot` for the call graph of the system. You can use the dot command from Graphviz module to convert it to a png file:
+    ```bash
+     dot -Tpng call_graph.dot -o call_graph.png
+    ```
+![Call Graph](call_graph.png)
 ## License
 
 This project is under the MIT License. See the LICENSE.md file for details.
