@@ -20,6 +20,10 @@ Lagra™ Prototype is a simple CLI-based Python application that allows users to
     ```bash
     python main.py
     ```
+The applications display language can also be changed at this stage. The default language is Swedish but `en` argument can be used to change the language to English:
+    ```bash
+    python main.py en
+    ```
 
 ## Usage
 

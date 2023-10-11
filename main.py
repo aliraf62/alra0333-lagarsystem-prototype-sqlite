@@ -3,7 +3,7 @@
 This is the main entry point for the Lagra™ Prototype CLI.
 It calls modules for database initialization, user registration, user login, data storage, and data retrieval.
 """
-
+import sys
 import getpass
 import sqlite3
 from db_init import init_db
@@ -11,35 +11,36 @@ from user_register import register_user
 from user_login import login_user
 from data_store import store_data
 from data_retrieve import retrieve_data
+from messages import messages as m
 
 # Main menu function
 def main_menu():
-    print("\nWelcome to Lagra™ Prototype")
-    print("1. Register")
-    print("2. Login")
-    print("3. Exit")
-    choice = input("Enter your choice: ")
+    print("\n"  +  m["10"][lang])
+    print("1. " +  m["11"][lang])
+    print("2. " +  m["12"][lang])
+    print("3. " +  m["13"][lang])
+    choice = input(m["choose"][lang])
     return choice
 
 # User menu function
 def user_menu(username):
-    print(f"\nWelcome, {username}")
-    print("1. Store Data")
-    print("2. Retrieve Data")
-    print("3. Logout")
-    choice = input("Enter your choice: ")
+    print("\n" +  m["20"][lang] + f"{username}")
+    print("1. "+  m["21"][lang])
+    print("2. "+  m["22"][lang])
+    print("3. "+  m["23"][lang])
+    choice = input(m["choose"][lang])
     return choice
 
 # Main CLI interface function
 def cli_interface():
     logged_in = False
     username = None
-    
+    #print(lang)
     # Initialize database
-    conn, result = init_db()
+    conn, result = init_db(lang)
     c = conn.cursor()
     if conn:
-        print("Database initialized.")
+        print(m["db_start"][lang])
     else:
         print(result)
         return
@@ -48,39 +49,45 @@ def cli_interface():
         if not logged_in:
             choice = main_menu()
             if choice == '1':  # Register user
-                username = input("Enter username: ")
-                password = getpass.getpass("Enter password: ")
-                success, message = register_user(conn, c, username, password)
+                username = input(m["user"][lang])
+                password = getpass.getpass(m["pwd"][lang])
+                success, message = register_user(conn, c, username, password,lang)
                 print(message)
             elif choice == '2': # Login
-                username = input("Enter username: ")
-                password = getpass.getpass("Enter password: ")
-                logged_in, message = login_user(c, username, password)
+                username = input(m["user"][lang])
+                password = getpass.getpass(m["pwd"][lang])
+                logged_in, message = login_user(c, username, password,lang)
                 print(message)
             elif choice == '3': # Exit
-                print("Thank you for using Lagra™ Prototype. Goodbye!")
+                print(m["exit"][lang])
                 break
             else:
-                print("Invalid choice. Please try again.")
+                print(m["invalid"][lang])
         else:
             choice = user_menu(username)
             if choice == '1': # Store data
-                data = input("Enter the data you want to store: ")
-                success, message = store_data(conn, c, username, data)
+                data = input(m["item"][lang])
+                success, message = store_data(conn, c, username, data,lang)
                 print(message)
             elif choice == '2': # Retrieve data
-                success, data = retrieve_data(c, username)
+                success, data = retrieve_data(c, username,lang)
                 if success:
-                    print("Your stored data:")
+                    print(m["retrieve"][lang])
                     for item in data:
                         print(f"- {item[0]}")
                 else:
                     print(data)
             elif choice == '3': # log out
-                print("Logged out successfully.")
+                print(m["logout"][lang])
                 logged_in = False
             else:
-                print("Invalid choice. Please try again.")
+                print(m["invalid"][lang])
 
-if __name__ == "__main__":
+def main(args):
+#    cli_interface()
+    global lang 
+    lang= 0 if "en" in args else 1
     cli_interface()
+if __name__ == "__main__":
+    main(sys.argv[1:])
+#    cli_interface()

@@ -1,11 +1,11 @@
-
+from messages import messages as m
 """
 This module is called by `main.py` to initialize the database.
 """
 
 import sqlite3
 
-def init_db():
+def init_db(lang):
     try:
         conn = sqlite3.connect('lagra_db.db')
         c = conn.cursor()
@@ -14,4 +14,4 @@ def init_db():
         conn.commit()
         return conn, c
     except sqlite3.Error as e:
-        return None, f"An error occurred: {e}"
+        return None, m["error"][lang] + f" {e}"
