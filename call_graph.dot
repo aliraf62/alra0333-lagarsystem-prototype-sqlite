@@ -1,0 +1,15 @@
+
+digraph call_graph {
+    main [shape=box, label="main.py"];
+    db_init [shape=box, label="db_init.py"];
+    user_register [shape=box, label="user_register.py"];
+    user_login [shape=box, label="user_login.py"];
+    data_store [shape=box, label="data_store.py"];
+    data_retrieve [shape=box, label="data_retrieve.py"];
+
+    main -> db_init [label="init_db"];
+    main -> user_register [label="register_user"];
+    main -> user_login [label="login_user"];
+    main -> data_store [label="store_data"];
+    main -> data_retrieve [label="retrieve_data"];
+}
