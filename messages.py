@@ -11,6 +11,7 @@ messages = {
         "logout"    :   ["Logged out successfully.",                          "Loggade ut framgångsrikt."                        ],
         "r0"        :   ["No data found",                                     "Ingen data hittades"                              ],
         "error"     :   ["An error occurred: ",                               "Ett fel inträffade: "                             ],
+        "reg"       :   ["User registered successfully.",                     "Användaren registrerades framgångsrikt."         ],
         "s0"        :   ["Data stored successfully",                          "Data lagrad framgångsrikt"                        ],
         "l0"        :   ["Logged in successfully",                            "Loggade in framgångsrikt"                         ],
         "l1"        :   ["Invalid username or password",                      "Ogiltigt användarnamn eller lösenord"             ],
