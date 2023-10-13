@@ -12,6 +12,7 @@ from user_login import login_user
 from data_store import store_data
 from data_retrieve import retrieve_data
 from messages import messages as m
+import time
 
 # Main menu function
 def main_menu():
@@ -51,8 +52,12 @@ def cli_interface():
             if choice == '1':  # Register user
                 username = input(m["user"][lang])
                 password = getpass.getpass(m["pwd"][lang])
+                #try:
                 success, message = register_user(conn, c, username, password,lang)
                 print(message)
+                #except TypeError:
+                #    print('User already exists.')
+
             elif choice == '2': # Login
                 username = input(m["user"][lang])
                 password = getpass.getpass(m["pwd"][lang])
